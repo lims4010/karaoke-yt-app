@@ -1,48 +1,50 @@
-//Initialize AudioContext and Connect to Output
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-const audioElement = document.querySelector('audio');
-// const track = audioContext.createMediaElementSource(audioElement);
+// //Initialize AudioContext and Connect to Output
 
-//Create buffer source to steam
-var playSound = audioContext.createBufferSource();
-var request = new XMLHttpRequest();
-request.open('GET', '/mp3files/iu.mp3', true);
-request.responseType = 'arraybuffer';
-request.onload = function() {
-  audioContext.decodeAudioData(request.response, function(buffer) {
-    playSound.buffer = buffer;
-    playSound.connect(audioContext.destination);
-  });
-};
-request.send();
-// window.addEventListener('load', playback);
+// const audioElement = document.querySelector('audio');
+// // const track = audioContext.createMediaElementSource(audioElement);
 
-// //Functionality
-// const speedControl = document.querySelector('#speed');
-// const playButton = document.querySelector('button');
+// //Create buffer source to steam
+// var playSound = audioContext.createBufferSource();
 
-// playButton.addEventListener(
-//   'click',
-//   function() {
-//     if (this.dataset.playing === 'false') {
-//       playSound.start();
-//       this.dataset.playing = 'on';
-//     } else if (this.dataset.playing === 'on') {
-//       audioContext.suspend();
-//       this.dataset.playing = 'off';
-//     } else if (this.dataset.playing === 'off') {
-//       audioContext.resume();
-//       this.dataset.playing = 'on';
-//     }
-//   },
-//   false
-// );
+// var request = new XMLHttpRequest();
+// request.open('GET', '/mp3files/iu.mp3', true);
+// request.responseType = 'arraybuffer';
+// request.onload = function() {
+//   audioContext.decodeAudioData(request.response, function(buffer) {
+//     playSound.buffer = buffer;
+//     // playSound.connect(audioContext.destination);
+//   });
+// };
+// request.send();
 
-// speedControl.addEventListener(
-//   'input',
-//   function() {
-//     var semitoneRatio = Math.pow(2, 1 / 12);
-//     playSound.playbackRate.value = Math.pow(semitoneRatio, this.value);
-//   },
-//   false
-// );
+// // window.addEventListener('load', playback);
+
+// // //Functionality
+// // const speedControl = document.querySelector('#speed');
+// // const playButton = document.querySelector('button');
+
+// // playButton.addEventListener(
+// //   'click',
+// //   function() {
+// //     if (this.dataset.playing === 'false') {
+// //       playSound.start();
+// //       this.dataset.playing = 'on';
+// //     } else if (this.dataset.playing === 'on') {
+// //       audioContext.suspend();
+// //       this.dataset.playing = 'off';
+// //     } else if (this.dataset.playing === 'off') {
+// //       audioContext.resume();
+// //       this.dataset.playing = 'on';
+// //     }
+// //   },
+// //   false
+// // );
+
+// // speedControl.addEventListener(
+// //   'input',
+// //   function() {
+// //     var semitoneRatio = Math.pow(2, 1 / 12);
+// //     playSound.playbackRate.value = Math.pow(semitoneRatio, this.value);
+// //   },
+// //   false
+// // );
