@@ -1,61 +1,48 @@
+//Initialize AudioContext and Connect to Output
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const audioElement = document.querySelector('audio');
-const track = audioContext.createMediaElementSource(audioElement);
+// const track = audioContext.createMediaElementSource(audioElement);
 
-track.connect(audioContext.destination);
-
-const speedControl = document.querySelector('#speed');
-var audioBuffer;
+//Create buffer source to steam
 var playSound = audioContext.createBufferSource();
-
 var request = new XMLHttpRequest();
 request.open('GET', '/mp3files/iu.mp3', true);
 request.responseType = 'arraybuffer';
 request.onload = function() {
   audioContext.decodeAudioData(request.response, function(buffer) {
-    audioBuffer = buffer;
-    playback();
+    playSound.buffer = buffer;
+    playSound.connect(audioContext.destination);
   });
 };
 request.send();
-window.addEventListener('load', playback);
+// window.addEventListener('load', playback);
 
-const playButton = document.querySelector('button');
-playButton.addEventListener(
-  'click',
-  function() {
-    if (this.dataset.playing === 'false') {
-      playSound.start();
-      this.dataset.playing = 'on';
-    } else if (this.dataset.playing === 'on') {
-      playSound.disconnect();
-      this.dataset.playing = 'off';
-    } else if (this.dataset.playing === 'off') {
-      playSound.connect(audioContext.destination);
-      this.dataset.playing = 'on';
-    }
-  },
-  false
-);
+// //Functionality
+// const speedControl = document.querySelector('#speed');
+// const playButton = document.querySelector('button');
 
-// audioElement.addEventListener(
-//   'ended',
-//   () => {
-//     playButton.dataset.playing = 'false';
+// playButton.addEventListener(
+//   'click',
+//   function() {
+//     if (this.dataset.playing === 'false') {
+//       playSound.start();
+//       this.dataset.playing = 'on';
+//     } else if (this.dataset.playing === 'on') {
+//       audioContext.suspend();
+//       this.dataset.playing = 'off';
+//     } else if (this.dataset.playing === 'off') {
+//       audioContext.resume();
+//       this.dataset.playing = 'on';
+//     }
 //   },
 //   false
 // );
 
-function playback() {
-  playSound.buffer = audioBuffer;
-  playSound.connect(audioContext.destination);
-}
-
-speedControl.addEventListener(
-  'input',
-  function() {
-    var semitoneRatio = Math.pow(2, 1 / 12);
-    playSound.playbackRate.value = Math.pow(semitoneRatio, this.value);
-  },
-  false
-);
+// speedControl.addEventListener(
+//   'input',
+//   function() {
+//     var semitoneRatio = Math.pow(2, 1 / 12);
+//     playSound.playbackRate.value = Math.pow(semitoneRatio, this.value);
+//   },
+//   false
+// );

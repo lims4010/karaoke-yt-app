@@ -6,10 +6,20 @@
   <body>
     <% include ../partials/nav.ejs %>
     <audio src="/mp3files/iu.mp3" type="audio/mpeg"></audio>
+    <div class="jumbotron">
+      <h1 class="display-4">Karaoke App</h1>
+      <p class="lead">
+        Developing a simple audio mixer for Youtube Videos.
+      </p>
+      <hr class="my-4" />
+      <p>
+        IN DEVELOPMENT
+      </p>
+    </div>
     <div class="row">
       <div class="col-lg-12 text-center">
         <button
-          class="btn btn-large"
+          class="btn btn-primary btn-lg"
           data-playing="false"
           role="switch"
           aria-checked="false"
@@ -18,10 +28,70 @@
         </button>
       </div>
     </div>
+    <div class="row inputs">
+      <label for="customRange1">Pitch</label>
+      <input
+        type="range"
+        class="custom-range"
+        id="pitch"
+        min="-12"
+        max="12"
+        value="0"
+        step="1"
+      />
+      <label for="customRange1">Speed</label>
+      <input
+        type="range"
+        class="custom-range"
+        id="speed"
+        min="-10"
+        max="10"
+        value="0"
+        step="0.01"
+      />
+      <label for="customRange1">Wet</label>
+      <input
+        type="range"
+        class="custom-range"
+        id="wet"
+        min="0"
+        max="1"
+        value="1"
+        step="0.01"
+      />
+      <label for="customRange1">Dry</label>
+      <input
+        type="range"
+        class="custom-range"
+        id="dry"
+        min="0"
+        max="1"
+        value="0"
+        step="0.01"
+      />
+      <label for="customRange1">Low Pass Filter</label>
+      <input
+        type="range"
+        class="custom-range"
+        id="filter"
+        min="0"
+        max="10000"
+        value="0"
+        step="50"
+      />
+      <label for="customRange1">Gain</label>
+      <input
+        type="range"
+        class="custom-range"
+        id="gain"
+        min="0"
+        max="10000"
+        value="0"
+        step="50"
+      />
     </div>
-  </div>
-  <br>
-    <input type="range" id="speed" min="-10" max="10" value="0" step="0.01" />
     <script type="text/javascript" src="/jsfiles/audio.js"></script>
+    <script type="text/javascript" src="/jsfiles/bundle.js"></script>
+    <script type="text/javascript" src="/jsfiles/audio1.js"></script>
   </body>
 </html>
