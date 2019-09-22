@@ -2,24 +2,114 @@
 <html>
   <head>
     <% include ../partials/header.ejs %>
+    <script type="text/javascript" src="./jsfiles/audioelement.js"></script>
+    <script type="text/javascript" src="./jsfiles/bundle.js"></script>
+    <script type="text/javascript" src="./jsfiles/connectsource.js"></script>
   </head>
   <body>
     <% include ../partials/nav.ejs %>
-    <audio src="/mp3files/iu.mp3" type="audio/mpeg"></audio>
-    <div class="jumbotron">
-      <h1 class="display-4">Karaoke App</h1>
-      <p class="lead">
-        Developing a simple audio mixer for Youtube Videos.
-      </p>
-      <hr class="my-4" />
-      <p>
-        IN DEVELOPMENT
-      </p>
-    </div>
     <div class="row">
-      <div class="col-lg-12 text-center">
+      <input
+        class="form-control form-control-lg"
+        id="youtubeinput"
+        type="text"
+        placeholder="Youtube address here..."
+      />
+    </div>
+    <div class="input row">
+      <div class="col-lg-6">
+        <label for="pitch">Pitch</label>
+        <input
+          type="range"
+          class="custom-range"
+          id="pitch"
+          min="-12"
+          max="12"
+          value="0"
+          step="1"
+        />
+      </div>
+      <div class="col-lg-6">
+        <label for="speed">Speed</label>
+        <input
+          type="range"
+          class="custom-range"
+          id="speed"
+          min="-10"
+          max="10"
+          value="0"
+          step="0.01"
+        />
+      </div>
+    </div>
+    <div class="input row">
+      <div class="col-lg-6">
+        <label for="wet">Wet</label>
+        <input
+          type="range"
+          class="custom-range"
+          id="wet"
+          min="0"
+          max="1"
+          value="1"
+          step="0.01"
+        />
+      </div>
+      <div class="col-lg-6">
+        <label for="dry">Dry</label>
+        <input
+          type="range"
+          class="custom-range"
+          id="dry"
+          min="0"
+          max="1"
+          value="0"
+          step="0.01"
+        />
+      </div>
+    </div>
+    <div class="input row">
+      <div class="col-lg-6">
+        <label for="filter">Low Pass Filter</label>
+        <input
+          type="range"
+          class="custom-range"
+          id="filter"
+          min="0"
+          max="10000"
+          value="0"
+          step="50"
+        />
+      </div>
+      <div class="col-lg-6">
+        <label for="gain">Gain</label>
+        <input
+          type="range"
+          class="custom-range"
+          id="gain"
+          min="0"
+          max="5"
+          value="0.5"
+          step="0.01"
+        />
+      </div>
+    </div>
+    <div class="input row text-center">
+      <div class="col-lg-6">
         <button
           class="btn btn-primary btn-lg"
+          id="samplebutton"
+          data-playing="false"
+          role="switch"
+          aria-checked="false"
+        >
+          <span>Load Sample</span>
+        </button>
+      </div>
+      <div class="col-lg-6">
+        <button
+          class="btn btn-primary btn-lg"
+          id="playbutton"
           data-playing="false"
           role="switch"
           aria-checked="false"
@@ -28,70 +118,6 @@
         </button>
       </div>
     </div>
-    <div class="row inputs">
-      <label for="customRange1">Pitch</label>
-      <input
-        type="range"
-        class="custom-range"
-        id="pitch"
-        min="-12"
-        max="12"
-        value="0"
-        step="1"
-      />
-      <label for="customRange1">Speed</label>
-      <input
-        type="range"
-        class="custom-range"
-        id="speed"
-        min="-10"
-        max="10"
-        value="0"
-        step="0.01"
-      />
-      <label for="customRange1">Wet</label>
-      <input
-        type="range"
-        class="custom-range"
-        id="wet"
-        min="0"
-        max="1"
-        value="1"
-        step="0.01"
-      />
-      <label for="customRange1">Dry</label>
-      <input
-        type="range"
-        class="custom-range"
-        id="dry"
-        min="0"
-        max="1"
-        value="0"
-        step="0.01"
-      />
-      <label for="customRange1">Low Pass Filter</label>
-      <input
-        type="range"
-        class="custom-range"
-        id="filter"
-        min="0"
-        max="10000"
-        value="0"
-        step="50"
-      />
-      <label for="customRange1">Gain</label>
-      <input
-        type="range"
-        class="custom-range"
-        id="gain"
-        min="0"
-        max="5"
-        value="0.5"
-        step="0.01"
-      />
-    </div>
-    <script type="text/javascript" src="/jsfiles/audio.js"></script>
-    <script type="text/javascript" src="/jsfiles/bundle.js"></script>
-    <script type="text/javascript" src="/jsfiles/audio1.js"></script>
+    <script type="text/javascript" src="./jsfiles/functions.js"></script>
   </body>
 </html>

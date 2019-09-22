@@ -1,29 +1,23 @@
-//Functionality
-// const speedControl = document.querySelector('#speed');
-// const playButton = document.querySelector('button');
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-// playButton.addEventListener(
-//   'click',
-//   function() {
-//     if (this.dataset.playing === 'false') {
-//       playSound.start();
-//       this.dataset.playing = 'on';
-//     } else if (this.dataset.playing === 'on') {
-//       audioContext.suspend();
-//       this.dataset.playing = 'off';
-//     } else if (this.dataset.playing === 'off') {
-//       audioContext.resume();
-//       this.dataset.playing = 'on';
-//     }
-//   },
-//   false
-// );
+function loadSound() {
+  var request = new XMLHttpRequest();
+  request.open('GET', 'http://localhost:5000/stream/nl6OW07A5q4', true);
+  request.responseType = 'arraybuffer';
 
-// speedControl.addEventListener(
-//   'input',
-//   function() {
-//     var semitoneRatio = Math.pow(2, 1 / 12);
-//     playSound.playbackRate.value = Math.pow(semitoneRatio, this.value);
-//   },
-//   false
-// );
+  request.onload = function() {
+    var Data = request.response;
+    process(Data);
+  };
+
+  request.send();
+}
+
+function process(Data) {
+  source = audioContext.createBufferSource(); // Create Sound Source
+  audioContext.decodeAudioData(Data, function(buffer) {
+    source.buffer = buffer;
+    source.connect(audioContext.destination);
+    source.start(audioContext.currentTime);
+  });
+}
