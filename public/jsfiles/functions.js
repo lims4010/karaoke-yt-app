@@ -72,9 +72,17 @@ const youtubeInput = document.querySelector('#youtubeinput');
 sampleButton.addEventListener(
   'click',
   function() {
-    playSound = connectSource();
-    playSound.start();
-    playButton.dataset.playing = 'on';
+    if (playButton.dataset.playing === 'false') {
+      playSound = connectSource();
+      playSound.start();
+      playButton.dataset.playing = 'on';
+    } else if (playButton.dataset.playing === 'on' || 'off') {
+      playSound.disconnect();
+      playSound = connectSource();
+      audioContext.resume();
+      playSound.start();
+      playButton.dataset.playing = 'on';
+    }
   },
   false
 );
@@ -82,11 +90,7 @@ sampleButton.addEventListener(
 playButton.addEventListener(
   'click',
   function() {
-    if (this.dataset.playing === 'false') {
-      playSound = connectSource();
-      playSound.start();
-      this.dataset.playing = 'on';
-    } else if (this.dataset.playing === 'on') {
+    if (this.dataset.playing === 'on') {
       audioContext.suspend();
       this.dataset.playing = 'off';
     } else if (this.dataset.playing === 'off') {
@@ -100,8 +104,19 @@ playButton.addEventListener(
 youtubeInput.addEventListener(
   'change',
   function() {
-    console.log(this.value);
-    this.value = '';
+    if (playButton.dataset.playing === 'false') {
+      playSound = connectSource(this.value);
+      playSound.start();
+      playButton.dataset.playing = 'on';
+      this.value = '';
+    } else if (playButton.dataset.playing === 'on' || 'off') {
+      playSound.disconnect();
+      playSound = connectSource(this.value);
+      audioContext.resume();
+      playSound.start();
+      playButton.dataset.playing = 'on';
+      this.value = '';
+    }
   },
   false
 );
