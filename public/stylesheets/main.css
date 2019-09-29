@@ -10,7 +10,15 @@ label {
 .btn-primary {
   margin: 1rem;
 }
+.video.row {
+  text-align: center;
+  display: block;
+}
 
-#youtubeinput {
+.text.row {
   margin: 1rem 15rem;
+}
+
+#youtubevideo {
+  pointer-events: none;
 }
