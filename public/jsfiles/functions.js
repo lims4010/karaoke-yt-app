@@ -75,16 +75,14 @@ const youtubeVideo = document.querySelector('#youtubevideo');
 sampleButton.addEventListener(
   'click',
   function() {
+    player.loadVideoById('NwxUejW0NUo');
+    player.pauseVideo();
     if (playButton.dataset.playing === 'false') {
-      player.loadVideoById('NwxUejW0NUo');
-      player.pauseVideo();
       playSound = connectSource();
       // audioContext.resume();
       // playSound.start();
       // playButton.dataset.playing = 'on';
     } else if (playButton.dataset.playing === 'on' || 'off') {
-      player.loadVideoById('NwxUejW0NUo');
-      player.pauseVideo();
       playSound.disconnect();
       playSound = connectSource();
       // audioContext.resume();
@@ -115,23 +113,16 @@ youtubeInput.addEventListener(
   'change',
   function() {
     var id = this.value.split('https://www.youtube.com/watch?v=');
-    if (playButton.dataset.playing === 'false') {
-      player.loadVideoById(id[1]);
-      player.pauseVideo();
-      playSound = connectSource(this.value);
-      // playSound.start();
-      // playButton.dataset.playing = 'on';
-      this.value = '';
-    } else if (playButton.dataset.playing === 'on' || 'off') {
+    player.loadVideoById(id[1]);
+    player.pauseVideo();
+    playSound = connectSource(this.value);
+    if (playButton.dataset.playing === 'on' || 'off') {
       playSound.disconnect();
-      player.loadVideoById(id[1]);
-      player.pauseVideo();
-      playSound = connectSource(this.value);
       // audioContext.resume();
       // playSound.start();
       // playButton.dataset.playing = 'on';
-      this.value = '';
     }
+    this.value = '';
   },
   false
 );
