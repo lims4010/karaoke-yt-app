@@ -72,28 +72,81 @@ const playButton = document.querySelector('#playbutton');
 const youtubeInput = document.querySelector('#youtubeinput');
 const youtubeVideo = document.querySelector('#youtubevideo');
 
+// sampleButton.addEventListener(
+//   'click',
+//   function() {
+//     if (playButton.dataset.playing === 'false') {
+//       player.loadVideoById('NwxUejW0NUo');
+//       player.pauseVideo();
+//       playSound = connectSource();
+//       // audioContext.resume();
+//       // playSound.start();
+//       // playButton.dataset.playing = 'on';
+//     } else if (playButton.dataset.playing === 'on' || 'off') {
+//       player.loadVideoById('NwxUejW0NUo');
+//       player.pauseVideo();
+//       playSound.disconnect();
+//       playSound = connectSource();
+//       // audioContext.resume();
+//       // playSound.start();
+//       // playButton.dataset.playing = 'on';
+//     }
+//   },
+//   false
+// );
 sampleButton.addEventListener(
   'click',
   function() {
-    if (playButton.dataset.playing === 'false') {
-      player.loadVideoById('NwxUejW0NUo');
-      player.pauseVideo();
-      playSound = connectSource();
-      // audioContext.resume();
-      // playSound.start();
-      // playButton.dataset.playing = 'on';
-    } else if (playButton.dataset.playing === 'on' || 'off') {
-      player.loadVideoById('NwxUejW0NUo');
-      player.pauseVideo();
-      playSound.disconnect();
-      playSound = connectSource();
-      // audioContext.resume();
-      // playSound.start();
-      // playButton.dataset.playing = 'on';
+    if (!youtubeInput.value) {
+      playIU();
+    } else {
+      playInput();
     }
   },
   false
 );
+
+function playInput() {
+  {
+    var id = youtubeInput.value.split('https://www.youtube.com/watch?v=');
+    if (playButton.dataset.playing === 'false') {
+      player.loadVideoById(id[1]);
+      player.pauseVideo();
+      playSound = connectSource(youtubeInput.value);
+      // playSound.start();
+      // playButton.dataset.playing = 'on';
+      youtubeInput.value = '';
+    } else if (playButton.dataset.playing === 'on' || 'off') {
+      playSound.disconnect();
+      player.loadVideoById(id[1]);
+      player.pauseVideo();
+      playSound = connectSource(youtubeInput.value);
+      // audioContext.resume();
+      // playSound.start();
+      // playButton.dataset.playing = 'on';
+      youtubeInput.value = '';
+    }
+  }
+}
+
+function playIU() {
+  if (playButton.dataset.playing === 'false') {
+    player.loadVideoById('NwxUejW0NUo');
+    player.pauseVideo();
+    playSound = connectSource();
+    // audioContext.resume();
+    // playSound.start();
+    // playButton.dataset.playing = 'on';
+  } else if (playButton.dataset.playing === 'on' || 'off') {
+    player.loadVideoById('NwxUejW0NUo');
+    player.pauseVideo();
+    playSound.disconnect();
+    playSound = connectSource();
+    // audioContext.resume();
+    // playSound.start();
+    // playButton.dataset.playing = 'on';
+  }
+}
 
 playButton.addEventListener(
   'click',
@@ -111,27 +164,27 @@ playButton.addEventListener(
   false
 );
 
-youtubeInput.addEventListener(
-  'change',
-  function() {
-    var id = this.value.split('https://www.youtube.com/watch?v=');
-    if (playButton.dataset.playing === 'false') {
-      player.loadVideoById(id[1]);
-      player.pauseVideo();
-      playSound = connectSource(this.value);
-      // playSound.start();
-      // playButton.dataset.playing = 'on';
-      this.value = '';
-    } else if (playButton.dataset.playing === 'on' || 'off') {
-      playSound.disconnect();
-      player.loadVideoById(id[1]);
-      player.pauseVideo();
-      playSound = connectSource(this.value);
-      // audioContext.resume();
-      // playSound.start();
-      // playButton.dataset.playing = 'on';
-      this.value = '';
-    }
-  },
-  false
-);
+// youtubeInput.addEventListener(
+//   'change',
+//   function() {
+//     var id = this.value.split('https://www.youtube.com/watch?v=');
+//     if (playButton.dataset.playing === 'false') {
+//       player.loadVideoById(id[1]);
+//       player.pauseVideo();
+//       playSound = connectSource(this.value);
+//       // playSound.start();
+//       // playButton.dataset.playing = 'on';
+//       this.value = '';
+//     } else if (playButton.dataset.playing === 'on' || 'off') {
+//       playSound.disconnect();
+//       player.loadVideoById(id[1]);
+//       player.pauseVideo();
+//       playSound = connectSource(this.value);
+//       // audioContext.resume();
+//       // playSound.start();
+//       // playButton.dataset.playing = 'on';
+//       this.value = '';
+//     }
+//   },
+//   false
+// );
