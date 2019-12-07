@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/usr/bin/env node
+>>>>>>> b4a8870cfae3c3fa4f34f40ec74af4b25de6747d
 const ytdl = require('ytdl-core');
 const FFmpeg = require('fluent-ffmpeg');
 const { PassThrough } = require('stream');

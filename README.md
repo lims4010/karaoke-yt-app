@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # node-js-getting-started
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).
@@ -46,3 +47,6 @@ For more information about using Node.js on Heroku, see these Dev Center article
 \$ git commit -m "Add cool face API"
 
 \$ git push heroku master
+=======
+Karoke App in Development
+>>>>>>> b4a8870cfae3c3fa4f34f40ec74af4b25de6747d
