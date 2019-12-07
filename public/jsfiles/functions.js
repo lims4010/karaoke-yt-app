@@ -58,8 +58,6 @@ gainControl.addEventListener(
 speedControl.addEventListener(
   'input',
   function() {
-    // var semitoneRatio = Math.pow(2, 1 / 12);
-    // playSound.playbackRate.value = Math.pow(semitoneRatio, this.value);
     playSound.playbackRate.value = this.value;
     player.setPlaybackRate(parseFloat(this.value));
   },
@@ -72,28 +70,6 @@ const playButton = document.querySelector('#playbutton');
 const youtubeInput = document.querySelector('#youtubeinput');
 const youtubeVideo = document.querySelector('#youtubevideo');
 
-// sampleButton.addEventListener(
-//   'click',
-//   function() {
-//     if (playButton.dataset.playing === 'false') {
-//       player.loadVideoById('NwxUejW0NUo');
-//       player.pauseVideo();
-//       playSound = connectSource();
-//       // audioContext.resume();
-//       // playSound.start();
-//       // playButton.dataset.playing = 'on';
-//     } else if (playButton.dataset.playing === 'on' || 'off') {
-//       player.loadVideoById('NwxUejW0NUo');
-//       player.pauseVideo();
-//       playSound.disconnect();
-//       playSound = connectSource();
-//       // audioContext.resume();
-//       // playSound.start();
-//       // playButton.dataset.playing = 'on';
-//     }
-//   },
-//   false
-// );
 sampleButton.addEventListener(
   'click',
   function() {
@@ -106,47 +82,73 @@ sampleButton.addEventListener(
   false
 );
 
+// function playInput() {
+//   {
+//     var id = youtubeInput.value.split('https://www.youtube.com/watch?v=');
+//     if (playButton.dataset.playing === 'false') {
+//       player.loadVideoById(id[1]);
+//       player.pauseVideo();
+//       playSound = connectSource(youtubeInput.value);
+//       youtubeInput.value = '';
+//     } else if (playButton.dataset.playing === 'on' || 'off') {
+//       playSound.disconnect();
+//       player.loadVideoById(id[1]);
+//       player.pauseVideo();
+//       playSound = connectSource(youtubeInput.value);
+//       youtubeInput.value = '';
+//     }
+//   }
+// }
 function playInput() {
   {
     var id = youtubeInput.value.split('https://www.youtube.com/watch?v=');
-    if (playButton.dataset.playing === 'false') {
-      player.loadVideoById(id[1]);
-      player.pauseVideo();
-      playSound = connectSource(youtubeInput.value);
-      // playSound.start();
-      // playButton.dataset.playing = 'on';
-      youtubeInput.value = '';
-    } else if (playButton.dataset.playing === 'on' || 'off') {
+    if (playButton.dataset.playing !== 'false') {
       playSound.disconnect();
-      player.loadVideoById(id[1]);
-      player.pauseVideo();
-      playSound = connectSource(youtubeInput.value);
-      // audioContext.resume();
-      // playSound.start();
-      // playButton.dataset.playing = 'on';
-      youtubeInput.value = '';
     }
+    player.loadVideoById(id[1]);
+    player.pauseVideo();
+    playSound = connectSource(youtubeInput.value);
+    youtubeInput.value = '';
   }
 }
 
+// function playIU() {
+//   if (playButton.dataset.playing === 'false') {
+//     player.loadVideoById('NwxUejW0NUo');
+//     player.pauseVideo();
+//     playSound = connectSource();
+//   } else if (playButton.dataset.playing === 'on' || 'off') {
+//     player.loadVideoById('NwxUejW0NUo');
+//     player.pauseVideo();
+//     playSound.disconnect();
+//     playSound = connectSource();
+//   }
+// }
+
 function playIU() {
-  if (playButton.dataset.playing === 'false') {
-    player.loadVideoById('NwxUejW0NUo');
-    player.pauseVideo();
-    playSound = connectSource();
-    // audioContext.resume();
-    // playSound.start();
-    // playButton.dataset.playing = 'on';
-  } else if (playButton.dataset.playing === 'on' || 'off') {
-    player.loadVideoById('NwxUejW0NUo');
-    player.pauseVideo();
+  if (playButton.dataset.playing !== 'false') {
     playSound.disconnect();
-    playSound = connectSource();
-    // audioContext.resume();
-    // playSound.start();
-    // playButton.dataset.playing = 'on';
   }
+  player.loadVideoById('NwxUejW0NUo');
+  player.pauseVideo();
+  playSound = connectSource();
 }
+
+// playButton.addEventListener(
+//   'click',
+//   function() {
+//     if (this.dataset.playing === 'on') {
+//       player.pauseVideo();
+//       audioContext.suspend();
+//       this.dataset.playing = 'off';
+//     } else if (this.dataset.playing === 'off') {
+//       player.playVideo();
+//       audioContext.resume();
+//       this.dataset.playing = 'on';
+//     }
+//   },
+//   false
+// );
 
 playButton.addEventListener(
   'click',
@@ -163,28 +165,3 @@ playButton.addEventListener(
   },
   false
 );
-
-// youtubeInput.addEventListener(
-//   'change',
-//   function() {
-//     var id = this.value.split('https://www.youtube.com/watch?v=');
-//     if (playButton.dataset.playing === 'false') {
-//       player.loadVideoById(id[1]);
-//       player.pauseVideo();
-//       playSound = connectSource(this.value);
-//       // playSound.start();
-//       // playButton.dataset.playing = 'on';
-//       this.value = '';
-//     } else if (playButton.dataset.playing === 'on' || 'off') {
-//       playSound.disconnect();
-//       player.loadVideoById(id[1]);
-//       player.pauseVideo();
-//       playSound = connectSource(this.value);
-//       // audioContext.resume();
-//       // playSound.start();
-//       // playButton.dataset.playing = 'on';
-//       this.value = '';
-//     }
-//   },
-//   false
-// );

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 const ytdl = require('ytdl-core');
 const FFmpeg = require('fluent-ffmpeg');
 const { PassThrough } = require('stream');
